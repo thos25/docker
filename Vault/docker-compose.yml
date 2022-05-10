@@ -1,0 +1,15 @@
+version: '2'
+services:
+  vault:
+    image: vault
+    container_name: vault
+    ports:
+      - "8200:8200"
+    restart: always
+    volumes:
+      - $HOME/github/docker/Vault/logs:/vault/logs
+      - $HOME/github/docker/Vault/file:/vault/file
+      - $HOME/github/docker/Vault/config:/vault/config
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=/vault/config/vault.json
